@@ -5,14 +5,13 @@ from data_models.polarisation import PolarisationFrame
 from processing_components.image.operations import export_image_to_fits, create_image_from_array
 
 if __name__ == '__main__':
-    filename = 'low_screen.fits'
-    r0 = 7000.0
+    r0 = 15000.0
     hiono = 3e5
-    bmax = 3000.0
-    diameter = 35.0
+    bmax = 20000.0
+    sampling = 100.0
     
-    bigD = 100000.0
-    m = int(bmax / diameter)
+    bigD = 200000.0
+    m = int(bmax / sampling)
     n = int(bigD / bmax)
     npixel = n * m
     print("Number of pixels %d" % (npixel))
@@ -22,11 +21,12 @@ if __name__ == '__main__':
     speed = 150000.0 / 3600.0
     direction = 0.0
     print("Ionospheric velocity %.3f (m/s) at direction %.1f (degrees)" % (speed, direction))
-    rate = 0.01
+    rate = 1.0/10.0
     alpha_mag = 0.9999
-    ntimes = int(3000 * rate)
+    ntimes = 61
     lowparamcube = numpy.array([(r0, speed, direction, hiono)])
-    
+    filename = 'low_screen_%.1fr0_%.3frate.fits' % (r0, rate)
+
     my_screens = ArScreens(n, m, pscale, rate, lowparamcube, alpha_mag)
     my_screens.run(ntimes, verbose=True)
     
@@ -48,7 +48,7 @@ if __name__ == '__main__':
     w.wcs.equinox = 2000.0
     data = numpy.zeros([nfreqwin, ntimes, npixel, npixel])
     for i, screen in enumerate(my_screens.screens[0]):
-        data[:, i, ...] = screen[numpy.newaxis, ...] - screen[numpy.newaxis, npixel//2, npixel//2]
+        data[:, i, ...] = screen[numpy.newaxis, ...]
     
     im = create_image_from_array(data, wcs=w, polarisation_frame=PolarisationFrame("stokesI"))
     print(im)
