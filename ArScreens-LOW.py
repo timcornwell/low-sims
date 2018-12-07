@@ -5,7 +5,7 @@ from data_models.polarisation import PolarisationFrame
 from processing_components.image.operations import export_image_to_fits, create_image_from_array
 
 if __name__ == '__main__':
-    r0 = 15000.0
+    r0 = 5000.0
     hiono = 3e5
     bmax = 20000.0
     sampling = 100.0
@@ -19,7 +19,7 @@ if __name__ == '__main__':
     print("Pixel size %.3f (m)" % pscale)
     print("Field of view %.1f (m)" % (npixel * pscale))
     speed = 150000.0 / 3600.0
-    direction = 0.0
+    direction = 90.0
     print("Ionospheric velocity %.3f (m/s) at direction %.1f (degrees)" % (speed, direction))
     rate = 1.0/10.0
     alpha_mag = 0.9999
