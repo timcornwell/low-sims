@@ -5,7 +5,7 @@ from data_models.polarisation import PolarisationFrame
 from processing_components.image.operations import export_image_to_fits, create_image_from_array
 
 if __name__ == '__main__':
-    r0 = 5000.0
+    r0 = 15000.0
     hiono = 3e5
     bmax = 20000.0
     sampling = 100.0
