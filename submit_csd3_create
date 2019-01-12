@@ -55,10 +55,6 @@ echo ${SLURM_JOB_NODELIST}
 
 cd $SLURM_SUBMIT_DIR
 echo -e "Changed directory to `pwd`.\n"
-# Archive the results
-archive="output_low-sims-mpc-create_skymodel_10sources_${JOBID}"
-mkdir ${archive}
-cd ${archive}
 
 #! Create a hostfile:
 scontrol show hostnames $SLURM_JOB_NODELIST > hostfile.$JOBID
@@ -93,13 +89,9 @@ export ARL_DASK_SCHEDULER=${scheduler}:8786
 echo "Scheduler is running at ${scheduler}"
 
 root=/home/hpccorn1/Workspace/low-sims
-
-CMD="python ${root}/low-sims-mpc-create_skymodel_10sources.py > low-sims-mpc-create_skymodel_10sources.out"
+CMD="cd ${root};python low-sims-mpc-50000m-create_skymodel_10sources.py > low-sims-mpc-50000m-create_skymodel_10sources.out"
 echo "About to execute $CMD"
 eval $CMD
 
-cp ${root}/low-sims-mpc-create_skymodel_10sources.py .
-cp ${0}  ./
-mv ../slurm-${JOBID}.out .
 exit
 
