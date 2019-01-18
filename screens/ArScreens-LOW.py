@@ -1,6 +1,6 @@
 import numpy as numpy
 
-from ArScreens import ArScreens
+import ArScreens
 from data_models.polarisation import PolarisationFrame
 from processing_components.image.operations import export_image_to_fits, create_image_from_array
 
