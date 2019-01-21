@@ -10,17 +10,17 @@
 
 #! sbatch directives begin here ###############################
 #! Name of the job:
-#SBATCH -J CREATE
+#SBATCH -J MAKE64
 #! Which project should be charged:
 #SBATCH -A SKA-SDP-SL2-CPU
 #! How many whole nodes should be allocated?
-#SBATCH --nodes=1
+#SBATCH --nodes=8
 #! How many (MPI) tasks will there be in total? (<= nodes*32)
-#SBATCH --ntasks=1
+#SBATCH --ntasks=64
 #! Memory limit
 #SBATCH --mem 384000
 #! How much wallclock time will be required?
-#SBATCH --time=04:00:00
+#SBATCH --time=12:00:00
 #! What types of email messages do you wish to receive?
 #SBATCH --mail-type=ALL
 #! Uncomment this to prevent the job from being requeued (e.g. if
@@ -55,6 +55,7 @@ echo ${SLURM_JOB_NODELIST}
 
 cd $SLURM_SUBMIT_DIR
 echo -e "Changed directory to `pwd`.\n"
+# Archive the results
 
 #! Create a hostfile:
 scontrol show hostnames $SLURM_JOB_NODELIST > hostfile.$JOBID
@@ -89,7 +90,10 @@ export ARL_DASK_SCHEDULER=${scheduler}:8786
 echo "Scheduler is running at ${scheduler}"
 
 root=/home/hpccorn1/Workspace/low-sims
-CMD="cd ${root};python low-sims-mpc-50000m-create_skymodel.py > low-sims-mpc-50000m-create_skymodel.out"
+
+cd ${root}
+
+CMD="cd ${root};make"
 echo "About to execute $CMD"
 eval $CMD
 

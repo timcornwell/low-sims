@@ -10,17 +10,17 @@
 
 #! sbatch directives begin here ###############################
 #! Name of the job:
-#SBATCH -J CREATE
+#SBATCH -J ITER
 #! Which project should be charged:
 #SBATCH -A SKA-SDP-SL2-CPU
 #! How many whole nodes should be allocated?
-#SBATCH --nodes=32
+#SBATCH --nodes=4
 #! How many (MPI) tasks will there be in total? (<= nodes*32)
-#SBATCH --ntasks=8
+#SBATCH --ntasks=16
 #! Memory limit
 #SBATCH --mem 384000
 #! How much wallclock time will be required?
-#SBATCH --time=04:00:00
+#SBATCH --time=12:00:00
 #! What types of email messages do you wish to receive?
 #SBATCH --mail-type=ALL
 #! Uncomment this to prevent the job from being requeued (e.g. if
@@ -89,7 +89,7 @@ export ARL_DASK_SCHEDULER=${scheduler}:8786
 echo "Scheduler is running at ${scheduler}"
 
 root=/home/hpccorn1/Workspace/low-sims
-CMD="cd ${root};python low-sims-mpc-50000m-iterate_10sources.py > low-sims-mpc-50000m-iterate_10sources.out"
+CMD="cd ${root};python low-sims-mpc-50000m-iterate.py > low-sims-mpc-50000m-iterate.out"
 echo "About to execute $CMD"
 eval $CMD
 

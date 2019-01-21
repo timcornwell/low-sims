@@ -27,6 +27,8 @@ The processing steps are in a python file and jupyter notebooks:
 - To create skymodel for mpc: low-sims-mpc-10000-create_skymodel.ipynb
 - To perform non-isoplanatic selfcal (MPCCAL) of nonisoplanatic data: low-sims-mpc-10000-mpccal.ipynb
 
+These steps can be run using make.
+
 The output files are placed in a sub-directory results. The images are standard FITS files, and
 all the other files are HDF5. Figures are placed in the figures sub-directory.
 
