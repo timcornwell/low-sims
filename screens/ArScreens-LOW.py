@@ -5,7 +5,7 @@ from data_models.polarisation import PolarisationFrame
 from processing_components.image.operations import export_image_to_fits, create_image_from_array
 
 if __name__ == '__main__':
-    r0 = 15000.0
+    r0 = 5000.0
     hiono = 3e5
     bmax = 20000.0
     sampling = 100.0
@@ -27,7 +27,7 @@ if __name__ == '__main__':
     lowparamcube = numpy.array([(r0, speed, direction, hiono)])
     filename = 'low_screen_%.1fr0_%.3frate.fits' % (r0, rate)
 
-    my_screens = ArScreens(n, m, pscale, rate, lowparamcube, alpha_mag)
+    my_screens = ArScreens.ArScreens(n, m, pscale, rate, lowparamcube, alpha_mag)
     my_screens.run(ntimes, verbose=True)
     
     from astropy.wcs import WCS
